@@ -1,0 +1,26 @@
+.profile__add-post-button {
+    margin: auto 0;
+    padding: 0;
+    cursor: pointer;
+    height: 50px;
+    min-width: 150px;
+    background: transparent;
+    background-image: url(../../../images/add_button.svg);
+    border: none;
+    opacity: 1;
+    transition: opacity 200ms ease-in-out;
+}
+.profile__add-post-button:hover {
+    opacity: .6;
+}
+@media screen and (max-width: 704px) {
+    .profile__add-post-button {
+        margin: 0 auto;
+        min-width: 282px;
+        background-image: url(../../../images/add_button_big.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: 1s ease-in-out;
+    }
+}

@@ -1,0 +1,12 @@
+.popup {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+    gap: 8px;
+}
+
+@media screen and (max-width: 520px) {
+    .popup{
+        gap: 16px;
+    }
+}
