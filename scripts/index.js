@@ -5,7 +5,6 @@ const editClosePopup = editPopup.querySelector('.popup__close-bttn');
 const editNameInput = editPopup.querySelector('.popup__input_type_name');
 const editJobInput = editPopup.querySelector('.popup__input_type_job'); 
 
-
 //Добавление карточки 
 const addPopup = document.querySelector('.popups_type_add'); //Окно добавления
 const addForm = addPopup.querySelector('.popup__form');
@@ -15,7 +14,6 @@ const addUrlInput = addPopup.querySelector('.popup__input_type_url');
 //Кнопка добавления карточки
 const addCardButton = document.querySelector('.profile__add-post-button');
 
-
 //Постоянные данных профиля
 const profile = document.querySelector('.profile__info');
 const nameProfile = profile.querySelector('.profile__name');
@@ -23,23 +21,19 @@ const jobProfile = profile.querySelector('.profile__job');
 //Поятоянная кнопки редактирования профиля
 const editProfileButton = document.querySelector('.profile__edit-button');
 
-
-
 //Постоянные попап с картинкой
 const popupImage = document.querySelector('.popups_type_image');
 const closePopupImage = popupImage.querySelector('.popup__close-bttn');
 const imgPopupImage = popupImage.querySelector('.popup__image');
-const subtitlePopupImage = popupImage.querySelector('.popup__subtitle');
-
+const subtitlePopupImage = popupImage.querySelector('.popup__container_subtitle');
 
 //Обработчик формы редактирования пролфиля
 function handleFormSubmit (evt) {
    evt.preventDefault(); 
     nameProfile.textContent = editNameInput.value;
     jobProfile.textContent = editJobInput.value;
-    delPopup(editPopup);
+    hidePopup(editPopup);
 }
-
 
 const cardList = document.querySelector('.cards');
 const cardTemplate = document.querySelector('.cards-template').content;
@@ -66,13 +60,11 @@ const cardTemplate = document.querySelector('.cards-template').content;
    return cardElement;
   };
 
-
 //Добавление карточки
 initialCards.forEach((objectCard) => {
     const newCard = createCard(objectCard);
     cardList.append(newCard);
 });
-
 
 //Функция вызова формы добавления карточки
 function handleFormAddCard(evt) {
@@ -84,26 +76,26 @@ function handleFormAddCard(evt) {
     addNameInput.value = '';
     addUrlInput.value = '';
     cardList.prepend(createCard(newObjectCard));
+    hidePopup(addPopup);
 }
 
 function showPopup(popup) {
     popup.classList.add('popup_opened');
 }
 
-function delPopup(popup) {
+function hidePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
 editProfileButton.addEventListener('click',() => showPopup(editPopup));
 
-editClosePopup.addEventListener('click',() => delPopup(editPopup));
+editClosePopup.addEventListener('click',() => hidePopup(editPopup));
 closePopupImage.addEventListener('click',() => {
-  delPopup(popupImage);
+  hidePopup(popupImage);
 });
 
 addCardButton.addEventListener('click', () => showPopup(addPopup));
-addClosePopup.addEventListener('click', () => delPopup(addPopup));
-
+addClosePopup.addEventListener('click', () => hidePopup(addPopup));
 
 // Cлушатели нажатия кнопок
 editForm.addEventListener('submit', handleFormSubmit);
