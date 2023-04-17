@@ -11,7 +11,7 @@ const addForm = addPopup.querySelector('.popup__form');
 const addClosePopup = addPopup.querySelector('.popup__close-bttn');
 const addNameInput = addPopup.querySelector('.popup__input_type_name');
 const addUrlInput = addPopup.querySelector('.popup__input_type_url');
-//Кнопка добавления карточки
+//Кнопка добавления карточки 
 const addCardButton = document.querySelector('.profile__add-post-button');
 
 //Постоянные данных профиля
