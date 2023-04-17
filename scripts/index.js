@@ -25,7 +25,7 @@ const editProfileButton = document.querySelector('.profile__edit-button');
 const popupImage = document.querySelector('.popups_type_image');
 const closePopupImage = popupImage.querySelector('.popup__close-bttn');
 const imgPopupImage = popupImage.querySelector('.popup__image');
-const subtitlePopupImage = popupImage.querySelector('.popup__container_subtitle');
+const subtitlePopupImage = popupImage.querySelector('.popup__subtitle');
 
 //Обработчик формы редактирования пролфиля
 function handleFormSubmit (evt) {

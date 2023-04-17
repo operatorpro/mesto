@@ -1,4 +1,7 @@
 .popup__container_image {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     max-width: 75vw;
     background-color: transparent;
     min-width: 0;
