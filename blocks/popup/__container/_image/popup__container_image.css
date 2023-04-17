@@ -1,0 +1,13 @@
+.popup__container_image {
+    max-width: 75vw;
+    background-color: transparent;
+    min-width: 0;
+    border-radius: 0;
+}
+
+@media screen and (max-width: 520px) {
+    .popup__container_image {
+        grid-column: 1 / 4;
+    }
+
+}
