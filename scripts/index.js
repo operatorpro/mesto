@@ -6,6 +6,7 @@ const editNameInput = editPopup.querySelector(".popup__input_type_name");
 const editJobInput = editPopup.querySelector(".popup__input_type_job");
 
 //Добавление карточки
+const blackBackground = document.querySelector('.popups');
 const addPopup = document.querySelector(".popups_type_add"); //Окно добавления
 const addForm = addPopup.querySelector(".popup__form");
 const addClosePopup = addPopup.querySelector(".popup__close-bttn");
@@ -43,8 +44,7 @@ function createCard(element) {
   cardElement.querySelector(".card__image").src = element.link;
   cardElement.querySelector(".card__image").alt = element.name;
   cardElement.querySelector(".card__title").textContent = element.name;
-  cardElement
-    .querySelector(".card__like")
+  cardElement.querySelector(".card__like")
     .addEventListener("click", (event) => {
       event.target.classList.toggle("card__like_active");
     });
@@ -61,8 +61,7 @@ function createCard(element) {
       showPopup(popupImage);
       imgPopupImage.src = cardElement.querySelector(".card__image").src;
       imgPopupImage.alt = cardElement.querySelector(".card__image").alt;
-      subtitlePopupImage.textContent =
-        cardElement.querySelector(".card__title").textContent;
+      subtitlePopupImage.textContent = cardElement.querySelector(".card__title").textContent;
     });
   return cardElement;
 }
@@ -88,7 +87,16 @@ function handleFormAddCard(evt) {
 
 function showPopup(popup) {
   popup.classList.add("popup_opened");
-}
+  blackBackground.addEventListener("click", (clickFunction) => { 
+    if (clickFunction.target == clickFunction.currentTarget) {
+    hidePopup(popup)
+  };
+  }); //Слушатель нажатия мыши на задник вне попап-а 
+  document.addEventListener('keydown', (clickFunction) => {
+    if (clickFunction.code == 'Escape') {
+      hidePopup(popup);
+    }});
+};
 
 function hidePopup(popup) {
   popup.classList.remove("popup_opened");
@@ -100,10 +108,12 @@ editClosePopup.addEventListener("click", () => hidePopup(editPopup));
 closePopupImage.addEventListener("click", () => {
   hidePopup(popupImage);
 });
-
+// Cлушатели нажатия кнопок
 addCardButton.addEventListener("click", () => showPopup(addPopup));
 addClosePopup.addEventListener("click", () => hidePopup(addPopup));
-
-// Cлушатели нажатия кнопок
 editForm.addEventListener("submit", handleProfileFormSubmit);
 addForm.addEventListener("submit", handleFormAddCard);
+
+
+
+
