@@ -6,7 +6,7 @@
     border-radius: 2px;
     background-color: #000;
     color: #fff;
-    margin: 48px 0 0;
+    margin: 13px 0 0;
     font-size: 18px;
     font-weight: 400;
     line-height: 22px;
@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 520px) {
     .popup__save-bttn {
-        margin-top: 45px;
+        margin-top: 10px;
         font-size: 14px;
     }
 }
