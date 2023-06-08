@@ -29,9 +29,9 @@
         <p class="footer__about">© 2023 Mesto Russia</p>
       </footer>
       <div class="popups popups_type_edit">
-        <div class="popup">
+        <div class="popup" novalidate>
           <button class="popup__close-bttn" type="button"></button>
-          <div class="popup__container" novalidate>
+          <div class="popup__container" >
             <form class="popup__form" name="editPopupForm">
               <h2 class="popup__title">Редактировать профиль</h2>
               <input class="popup__input popup__input_type_name" id="name-input" placeholder="Имя" type="text" name="name" value="Жак-Ив Кусто" minlength="2" maxlength="40" required/>
@@ -46,9 +46,9 @@
         </div>
       </div>
       <div class="popups popups_type_add">
-        <div class="popup">
+        <div class="popup" novalidate>
           <button class="popup__close-bttn" type="button"></button>
-          <div class="popup__container" novalidate>
+          <div class="popup__container" >
             <form class="popup__form" name="addPopupForm">
               <h2 class="popup__title">Новое место</h2>
               <input class="popup__input popup__input_type_name" id="sub-input" placeholder="Название" type="text" name="name" minlength="2" maxlength="30" required />
