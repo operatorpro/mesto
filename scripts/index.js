@@ -88,7 +88,7 @@ function handleFormAddCard(evt) {
 function showPopup(popup) {
   popup.classList.add('popup_opened');
   blackBackground.addEventListener('click', (clickFunction) => { //Слушатель нажатия мыши на задник вне попап-а 
-    if (clickFunction.target == clickFunction.currentTarget) {
+    if (clickFunction.target === blackBackground) {
     hidePopup(popup);
   };
   }); 
@@ -96,12 +96,12 @@ function showPopup(popup) {
     if (clickFunction.code == 'Escape') {
       hidePopup(popup);
     }});
-    console.log ('errorClass' in classValidation);
 };
 
 function hidePopup(popup) {
   popup.classList.remove('popup_opened');
 }
+
 
 editProfileButton.addEventListener('click', () => showPopup(editPopup));
 
