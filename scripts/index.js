@@ -83,6 +83,7 @@ function handleFormAddCard(evt) {
   addUrlInput.value = " ";
   cardList.prepend(createCard(newObjectCard));
   hidePopup(addPopup);
+  enableValidation();
 }
 
 function showPopup(popup) {
