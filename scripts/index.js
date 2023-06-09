@@ -79,8 +79,8 @@ function handleFormAddCard(evt) {
     name: addNameInput.value,
     link: addUrlInput.value,
   };
-  addNameInput.value = "";
-  addUrlInput.value = "";
+  addNameInput.value = " ";
+  addUrlInput.value = " ";
   cardList.prepend(createCard(newObjectCard));
   hidePopup(addPopup);
 }
@@ -92,17 +92,18 @@ function showPopup(popup) {
     hidePopup(popup);
   };
   }); 
-  document.addEventListener('keydown', (clickFunction) => { //Слушатель кнопки ESC
-    if (clickFunction.code == 'Escape') {
-      hidePopup(popup);
-    }});
 };
-
 function hidePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-
+//Функция закрытия попапа по кнопке ESC
+function closePopupButtonESC(){
+document.addEventListener('keydown', (clickFunction) => { //Слушатель кнопки ESC
+  if (clickFunction.code == 'Escape') {
+    hidePopup(popup);
+  }});
+}
 editProfileButton.addEventListener('click', () => showPopup(editPopup));
 
 editClosePopup.addEventListener('click', () => hidePopup(editPopup));

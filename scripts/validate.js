@@ -11,7 +11,6 @@ const classValidation =  {
 const showError = (popupElement, inputElement, errorMessage, {inputErrorClass, errorClass}) => {
   const errorElement = popupElement.querySelector((`.${inputElement.id}-error`));
   inputElement.classList.add(inputErrorClass);
-  console.log(errorMessage);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
   
