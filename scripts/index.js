@@ -12,6 +12,7 @@ const addForm = addPopup.querySelector('.popup__form');
 const addClosePopup = addPopup.querySelector('.popup__close-bttn');
 const addNameInput = addPopup.querySelector('.popup__input_type_name');
 const addUrlInput = addPopup.querySelector('.popup__input_type_url');
+const addNewCard = addPopup.querySelector('.popup__save-bttn_type_create');
 //Кнопка добавления карточки
 const addCardButton = document.querySelector('.profile__add-post-button');
 
@@ -79,11 +80,11 @@ function handleFormAddCard(evt) {
     name: addNameInput.value,
     link: addUrlInput.value,
   };
-  addNameInput.value = " ";
-  addUrlInput.value = " ";
-  cardList.prepend(createCard(newObjectCard));
+  addNameInput.value = "";
+  addUrlInput.value = "";
+  cardList.prepend(createCard(newObjectCard)); 
+  addNewCard.classList.add('popup__save-bttn_type_non-active');
   hidePopup(addPopup);
-  enableValidation();
 }
 
 function showPopup(popup) {
