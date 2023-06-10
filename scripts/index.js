@@ -6,7 +6,6 @@ const editNameInput = editPopup.querySelector('.popup__input_type_name');
 const editJobInput = editPopup.querySelector('.popup__input_type_job');
 
 //Добавление карточки
-const blackBackground = document.querySelector('.popups');
 const addPopup = document.querySelector('.popups_type_add'); //Окно добавления
 const addForm = addPopup.querySelector('.popup__form');
 const addClosePopup = addPopup.querySelector('.popup__close-bttn');
@@ -35,7 +34,7 @@ function handleProfileFormSubmit(evt) {
   nameProfile.textContent = editNameInput.value;
   jobProfile.textContent = editJobInput.value;
   hidePopup(editPopup);
-}
+};
 
 const cardList = document.querySelector('.cards');
 const cardTemplate = document.querySelector('.cards-template').content;
@@ -65,7 +64,7 @@ function createCard(element) {
       subtitlePopupImage.textContent = cardElement.querySelector('.card__title').textContent;
     });
   return cardElement;
-}
+};
 
 //Добавление карточки
 initialCards.forEach((objectCard) => {
@@ -85,39 +84,44 @@ function handleFormAddCard(evt) {
   cardList.prepend(createCard(newObjectCard)); 
   addNewCard.classList.add('popup__save-bttn_type_non-active');
   hidePopup(addPopup);
-}
+};
 
 function showPopup(popup) {
   popup.classList.add('popup_opened');
-  blackBackground.addEventListener('click', (clickFunction) => { //Слушатель нажатия мыши на задник вне попап-а 
-    if (clickFunction.target === blackBackground) {
-    hidePopup(popup);
-  };
-  }); 
-};
+  document.addEventListener('keydown', closePopupButtonESC);
+}; 
+
 function hidePopup(popup) {
   popup.classList.remove('popup_opened');
-}
+  document.removeEventListener('keydown', closePopupButtonESC);
+};
 
 //Функция закрытия попапа по кнопке ESC
-function closePopupButtonESC(){
-document.addEventListener('keydown', (clickFunction) => { //Слушатель кнопки ESC
-  if (clickFunction.code == 'Escape') {
-    hidePopup(popup);
-  }});
-}
-editProfileButton.addEventListener('click', () => showPopup(editPopup));
+function closePopupButtonESC(event){
+  if (event.key === 'Escape') {
+    hidePopup(document.querySelector('.popup_opened'));
+  }
+};
 
+function closePopupClickBackground(event) {
+  if (event.target.classList.contains('popups')) {
+    hidePopup(event.target);
+  }
+}
+
+editProfileButton.addEventListener('click', () => showPopup(editPopup));
 editClosePopup.addEventListener('click', () => hidePopup(editPopup));
-closePopupImage.addEventListener('click', () => {
-  hidePopup(popupImage);
-});
+closePopupImage.addEventListener('click', () => hidePopup(popupImage));
 // Cлушатели нажатия кнопок
 addCardButton.addEventListener('click', () => showPopup(addPopup));
 addClosePopup.addEventListener('click', () => hidePopup(addPopup));
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleFormAddCard);
 
+editPopup.addEventListener('click', closePopupClickBackground);
+addPopup.addEventListener('click', closePopupClickBackground);
 
 
-
+//Comment for rev:
+//Прозрачность фона равна той, то указана в ТЗ: Opacity 50% = 0.5 RGBA !!!
+//Альфа и есть указание прозрачности

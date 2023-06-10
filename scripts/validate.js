@@ -44,8 +44,10 @@ const hasInvalidInput = (inputList) => {
 const toogleButton = (inputList, buttonElement, {inactiveButtonClass} ) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.setAttribute("disabled", true);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.removeAttribute("disabled", true);
   }
 };
 
@@ -62,10 +64,10 @@ const setEventListeners = (popupElement, {inputSelector, submitButtonSelector, .
   });
 };
 
-//Функция поиска всех массивов с попапами
+//Функция поиска всех массивов форм
 const enableValidation = ({formSelector, ...rest}) => {
-    const popupList = Array.from(document.querySelectorAll(formSelector));
-    popupList.forEach((popupElement) => {
+    const formList = Array.from(document.querySelectorAll(formSelector));
+    formList.forEach((popupElement) => {
         popupElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
       });
