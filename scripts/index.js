@@ -28,6 +28,9 @@ const closePopupImage = popupImage.querySelector('.popup__close-bttn');
 const imgPopupImage = popupImage.querySelector('.popup__image');
 const subtitlePopupImage = popupImage.querySelector('.popup__subtitle');
 
+//Постоянные со всеми крестами закрытия попапа
+const buttonCloseList = document.querySelectorAll('.popup__close-bttn'); 
+
 //Обработчик формы редактирования профиля
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -62,6 +65,7 @@ function createCard(element) {
       imgPopupImage.src = cardElement.querySelector('.card__image').src;
       imgPopupImage.alt = cardElement.querySelector('.card__image').alt;
       subtitlePopupImage.textContent = cardElement.querySelector('.card__title').textContent;
+
     });
   return cardElement;
 };
@@ -83,6 +87,7 @@ function handleFormAddCard(evt) {
   addUrlInput.value = "";
   cardList.prepend(createCard(newObjectCard)); 
   addNewCard.classList.add('popup__save-bttn_type_non-active');
+  addNewCard.setAttribute("disabled", true);
   hidePopup(addPopup);
 };
 
@@ -102,26 +107,23 @@ function closePopupButtonESC(event){
     hidePopup(document.querySelector('.popup_opened'));
   }
 };
-
+//Функция закрытия попапа по клику на фон
 function closePopupClickBackground(event) {
   if (event.target.classList.contains('popups')) {
     hidePopup(event.target);
   }
 }
 
-editProfileButton.addEventListener('click', () => showPopup(editPopup));
-editClosePopup.addEventListener('click', () => hidePopup(editPopup));
-closePopupImage.addEventListener('click', () => hidePopup(popupImage));
+
 // Cлушатели нажатия кнопок
+editProfileButton.addEventListener('click', () => showPopup(editPopup));
 addCardButton.addEventListener('click', () => showPopup(addPopup));
-addClosePopup.addEventListener('click', () => hidePopup(addPopup));
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleFormAddCard);
 
-editPopup.addEventListener('click', closePopupClickBackground);
-addPopup.addEventListener('click', closePopupClickBackground);
-
-
-//Comment for rev:
-//Прозрачность фона равна той, то указана в ТЗ: Opacity 50% = 0.5 RGBA !!!
-//Альфа и есть указание прозрачности
+//Перебираем попапы и задаем слушатели на закрытие по фону и крестику
+buttonCloseList.forEach(btn => {
+  const popup = btn.closest('.popups');
+  popup.addEventListener('mousedown', closePopupClickBackground);
+  btn.addEventListener('click', () => hidePopup(popup)); 
+}); 
