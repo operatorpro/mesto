@@ -105,8 +105,7 @@ buttonCloseList.forEach(btn => {
   btn.addEventListener('click', () => hidePopup(popup)); 
 }); 
 
-// const newValidation = new FormValidator.enableValidation();
-// newValidation();
+//Инициализация поиска форм для валидации
 const allPopupPage = () => {
   const formList =  Array.from(document.querySelectorAll(classValidation.formSelector));
   formList.forEach((formElement)=> {
@@ -115,9 +114,5 @@ const allPopupPage = () => {
   });
 };
 allPopupPage();
-//allPopupPage();
-//formValidator.enableValidation();
-//console.log('hello'+ classValidation.formSelector);
-//formValidator.enableValidation();
-//console.log(FormValidator.enableValidation());
+
 export {showPopup, imgPopupImage, subtitlePopupImage, popupImage};
