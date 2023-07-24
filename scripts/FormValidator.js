@@ -1,11 +1,4 @@
-const classValidation =  {
-    formSelector: '.popups',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save-bttn',
-    inactiveButtonClass: 'popup__save-bttn_type_non-active',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
-  };
+import {classValidation} from './index.js';
   class FormValidator {
     constructor(validationConfig, formElement){
         this._validationConfig = validationConfig;
@@ -14,9 +7,11 @@ const classValidation =  {
         this._buttonElement = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
     }
 
+    enableValidation = () =>{
+      this._setEventListeners();
+    }
       //Функция поиска инпутов 
-      setEventListeners = (popupElement) => {
-        console.log(this._buttonElement);
+      _setEventListeners = (popupElement) => {
         this._inputList.forEach((inputElement) => {
             this._toogleButton(this._inputList, this._buttonElement);
             inputElement.addEventListener('input', () => {
@@ -29,7 +24,6 @@ const classValidation =  {
     //Функция добавления класса ошибки
     _showError = (inputElement) => {
         const errorElement = this._formElement.querySelector((`.${inputElement.id}-error`));
-        //console.log(errorMessage);
         inputElement.classList.add(this._validationConfig.inputErrorClass);
         errorElement.textContent = inputElement.validationMessage;
         errorElement.classList.add(this._validationConfig.errorClass);
@@ -61,15 +55,16 @@ const classValidation =  {
         };
   
   // Функция включения/отключения кнопки
-    _toogleButton = (inputList, buttonElement) => {
-        if (this._hasInvalidInput(inputList)) {
-            buttonElement.classList.add(this._validationConfig.inactiveButtonClass);
-            buttonElement.setAttribute("disabled", true);
-        } else {
-            buttonElement.classList.remove(this._validationConfig.inactiveButtonClass);
-            buttonElement.removeAttribute("disabled", true);
-        }
-     };
+     _toogleButton() {
+      if (this._hasInvalidInput()) {
+        this._buttonElement.classList.add(this._validationConfig.inactiveButtonClass);
+        this._buttonElement.setAttribute("disabled", true);
+      } else {
+        this._buttonElement.classList.remove(this._validationConfig.inactiveButtonClass);
+        this._buttonElement.removeAttribute("disabled", true);
+      }
+    }
+  
 
   }  
-  export {FormValidator, classValidation};
+  export {FormValidator};

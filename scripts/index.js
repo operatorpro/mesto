@@ -1,6 +1,15 @@
 import {initialCards} from './initialCards.js';
 import Card from './Card.js';
-import {classValidation, FormValidator} from './FormValidator.js';
+import {FormValidator} from './FormValidator.js';
+
+const classValidation =  {
+  formSelector: '.popups',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-bttn',
+  inactiveButtonClass: 'popup__save-bttn_type_non-active',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
 
 // Редактирование профиля
 const editPopup = document.querySelector('.popups_type_edit'); //Окно редактирования
@@ -35,22 +44,21 @@ const editProfileButton = document.querySelector('.profile__edit-button');
 //Постоянные со всеми крестами закрытия попапа
 const buttonCloseList = document.querySelectorAll('.popup__close-bttn'); 
 
-//Обработчик формы редактирования профиля
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  nameProfile.textContent = editNameInput.value;
-  jobProfile.textContent = editJobInput.value;
-  hidePopup(editPopup);
-};
+
 
 //КАРТОЧКА
 const cardList = document.querySelector('.cards');
 const cardTemplate = document.querySelector('.cards-template').content;
 
-//Добавление карточки
-initialCards.forEach((objectCard) => {
-  const cardElement = new Card(objectCard, '.cards-template').createCard();
-  cardList.append(cardElement);
+//Функция генерации разменки, которая возвращает карточку
+function newCard(cardData) {
+  const cardElement = new Card(cardData, '.cards-template').createCard();
+  return cardElement;
+}
+//обход массива данных
+initialCards.forEach((objectCard) => { 
+  const cardElement = newCard(objectCard);
+  cardList.append(cardElement); 
 });
 
 //Функция вызова формы добавления карточки
@@ -62,13 +70,22 @@ function handleFormAddCard(evt) {
   };
   addNameInput.value = "";
   addUrlInput.value = "";
-  const cardElement = new Card(newObjectCard, '.cards-template').createCard();
-  cardList.prepend(cardElement);
-  addNewCard.classList.add('popup__save-bttn_type_non-active');
-  addNewCard.setAttribute("disabled", true);
+  cardList.prepend(newCard(newObjectCard));
   hidePopup(addPopup);
 };
 
+//Обработчик формы редактирования профиля
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  nameProfile.textContent = editNameInput.value;
+  jobProfile.textContent = editJobInput.value;
+  hidePopup(editPopup);
+};
+
+function addTextForm() {
+  editNameInput.value = nameProfile.textContent;
+  editJobInput.value = jobProfile.textContent;
+}
 //Функция показа pop-up
 export default function showPopup(popup) {
   popup.classList.add('popup_opened');
@@ -94,7 +111,7 @@ function closePopupClickBackground(event) {
 }
 
 // Cлушатели нажатия кнопок
-editProfileButton.addEventListener('click', () => showPopup(editPopup));
+editProfileButton.addEventListener('click', () => showPopup(editPopup),addTextForm());
 addCardButton.addEventListener('click', () => showPopup(addPopup));
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleFormAddCard);
@@ -107,13 +124,34 @@ buttonCloseList.forEach(btn => {
 }); 
 
 //Инициализация поиска форм для валидации
+// const allPopupPage = () => {
+//   const formList = Array.from(document.querySelectorAll(classValidation.formSelector));
+//   formList.forEach((formElement) => {
+//     const formValidator = new FormValidator(classValidation, formElement);
+//     formValidator.enableValidation(formElement);
+//   });
+// };
+
+// allPopupPage();
 const allPopupPage = () => {
   const formList =  Array.from(document.querySelectorAll(classValidation.formSelector));
   formList.forEach((formElement)=> {
-    const formValidator = new FormValidator(classValidation, formElement);
-    formValidator.setEventListeners(formElement);
+    function initializeProfileFormValidation() {
+      const formValidator = new FormValidator(classValidation, editPopup);
+      formValidator.enableValidation();
+    }
+    
+    // Функция инициализации валидации для формы добавления карточки
+    function initializeAddCardFormValidation() {
+      const formValidator = new FormValidator(classValidation, addPopup);
+      formValidator.enableValidation();
+    }
+    
+    // Вызов функций для инициализации валидации форм
+    initializeProfileFormValidation();
+    initializeAddCardFormValidation();
   });
 };
 allPopupPage();
 
-export {showPopup, imgPopupImage, subtitlePopupImage, popupImage};
+export {showPopup, imgPopupImage, subtitlePopupImage, popupImage, classValidation};
