@@ -11,11 +11,11 @@ import {classValidation} from './index.js';
       this._setEventListeners();
     }
       //Функция поиска инпутов 
-      _setEventListeners = (popupElement) => {
+      _setEventListeners = () => {
         this._inputList.forEach((inputElement) => {
-            this._toogleButton(this._inputList, this._buttonElement);
+            this._toogleButton();
             inputElement.addEventListener('input', () => {
-                this._toogleButton(this._inputList, this._buttonElement);
+                this._toogleButton();
                 this._checkInputValidity(inputElement);
             });
         });

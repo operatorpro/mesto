@@ -71,6 +71,7 @@ function handleFormAddCard(evt) {
   addNameInput.value = "";
   addUrlInput.value = "";
   cardList.prepend(newCard(newObjectCard));
+  initializeFormValidation(addPopup);
   hidePopup(addPopup);
 };
 
@@ -123,33 +124,18 @@ buttonCloseList.forEach(btn => {
   btn.addEventListener('click', () => hidePopup(popup)); 
 }); 
 
-//Инициализация поиска форм для валидации
-// const allPopupPage = () => {
-//   const formList = Array.from(document.querySelectorAll(classValidation.formSelector));
-//   formList.forEach((formElement) => {
-//     const formValidator = new FormValidator(classValidation, formElement);
-//     formValidator.enableValidation(formElement);
-//   });
-// };
+// Функция инициализации валидации для формы добавления карточки
+function initializeFormValidation(popupElement) {
+  const formValidator = new FormValidator(classValidation, popupElement);
+  formValidator.enableValidation();
+}
 
-// allPopupPage();
 const allPopupPage = () => {
   const formList =  Array.from(document.querySelectorAll(classValidation.formSelector));
   formList.forEach((formElement)=> {
-    function initializeProfileFormValidation() {
-      const formValidator = new FormValidator(classValidation, editPopup);
-      formValidator.enableValidation();
-    }
-    
-    // Функция инициализации валидации для формы добавления карточки
-    function initializeAddCardFormValidation() {
-      const formValidator = new FormValidator(classValidation, addPopup);
-      formValidator.enableValidation();
-    }
-    
     // Вызов функций для инициализации валидации форм
-    initializeProfileFormValidation();
-    initializeAddCardFormValidation();
+    initializeFormValidation(editPopup);
+    initializeFormValidation(addPopup);
   });
 };
 allPopupPage();
