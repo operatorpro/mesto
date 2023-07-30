@@ -71,7 +71,7 @@ function handleFormAddCard(evt) {
   addNameInput.value = "";
   addUrlInput.value = "";
   cardList.prepend(newCard(newObjectCard));
-  initializeFormValidation(addPopup);
+  //initializeFormValidation(addPopup);
   hidePopup(addPopup);
 };
 
@@ -125,18 +125,20 @@ buttonCloseList.forEach(btn => {
 }); 
 
 // Функция инициализации валидации для формы добавления карточки
-function initializeFormValidation(popupElement) {
-  const formValidator = new FormValidator(classValidation, popupElement);
-  formValidator.enableValidation();
-}
+// function initializeFormValidation(popupElement) {
+//   const formValidator = new FormValidator(classValidation, popupElement);
+//   formValidator.enableValidation();
+//   return formValidator;
+// }
 
 const allPopupPage = () => {
-  const formList =  Array.from(document.querySelectorAll(classValidation.formSelector));
-  formList.forEach((formElement)=> {
-    // Вызов функций для инициализации валидации форм
-    initializeFormValidation(editPopup);
-    initializeFormValidation(addPopup);
-  });
+  const profileValidation = new FormValidator(classValidation, editPopup);
+  const newCardValidation = new FormValidator(classValidation, addPopup);
+  profileValidation.enableValidation();
+  newCardValidation.enableValidation();  
+  // обработчик на кнопку "сохранить" формы добавления карточки
+  addCardButton.addEventListener('mousedown', () => newCardValidation._toogleButton());
+
 };
 allPopupPage();
 

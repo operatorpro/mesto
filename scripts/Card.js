@@ -18,8 +18,8 @@ class Card {
     return cardTemplate;
   }
 //Обработчик like
-  _handleLikeClick = (event) => {
-    event.target.classList.toggle('card__like_active');
+  _handleLikeClick = () => {
+    this._cardLikeButton.classList.toggle('card__like_active');
   };
 //Обработчик закрытия
   _handleTrashClick = () => {
