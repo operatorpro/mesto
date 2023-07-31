@@ -125,18 +125,9 @@ buttonCloseList.forEach(btn => {
   btn.addEventListener('click', () => hidePopup(popup)); 
 }); 
 
-// Функция инициализации валидации для формы добавления карточки
-// function initializeFormValidation(popupElement) {
-//   const formValidator = new FormValidator(classValidation, popupElement);
-//   formValidator.enableValidation();
-//   return formValidator;
-// }
   const profileValidation = new FormValidator(classValidation, editPopup);
   const newCardValidation = new FormValidator(classValidation, addPopup);
   profileValidation.enableValidation();
   newCardValidation.enableValidation();  
-  // обработчик на кнопку "сохранить" формы добавления карточки
- // addCardButton.addEventListener('mousedown', () => newCardValidation._toogleButton());
-
 
 export {showPopup, imgPopupImage, subtitlePopupImage, popupImage, classValidation};
