@@ -13,9 +13,9 @@ import {classValidation} from './index.js';
       //Функция поиска инпутов 
       _setEventListeners = () => {
         this._inputList.forEach((inputElement) => {
-            this._toogleButton();
+            this.toogleButton();
             inputElement.addEventListener('input', () => {
-                this._toogleButton();
+                this.toogleButton();
                 this._checkInputValidity(inputElement);
             });
         });
@@ -55,7 +55,7 @@ import {classValidation} from './index.js';
         };
   
   // Функция включения/отключения кнопки
-     _toogleButton() {
+     toogleButton() {
       if (this._hasInvalidInput()) {
         this._buttonElement.classList.add(this._validationConfig.inactiveButtonClass);
         this._buttonElement.setAttribute("disabled", true);
