@@ -71,7 +71,6 @@ function handleFormAddCard(evt) {
   addNameInput.value = "";
   addUrlInput.value = "";
   cardList.prepend(newCard(newObjectCard));
-  //initializeFormValidation(addPopup);
   newCardValidation.toogleButton();
   hidePopup(addPopup);
 };
