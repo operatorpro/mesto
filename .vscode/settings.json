@@ -1,3 +1,4 @@
 {
-  "accessibility.verbosity.diff-editor": true
+  "accessibility.verbosity.diff-editor": true,
+  "git.ignoreLimitWarning": true
 }
