@@ -1,11 +1,12 @@
-import { popupImagePic, popupImageSubtitle, popupImage } from './index.js';
+import { handleImageClick } from './index.js';
 import { showPopup } from './modal.js';
 
 class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleImageClick) {
     const { link, name } = data;
     this._data = { link, name };
     this._templateSelector = templateSelector;
+    this._handleImageClick = handleImageClick;
     this._cardLikeButton = null;
   }
 //Поиск template-элемента
@@ -26,12 +27,9 @@ class Card {
     this._element.remove();
   };
 //Обработчик на открытие попап-а с картинкой
-  _handleImageClick = () => {
-    showPopup(popupImage);
-    popupImagePic.src = this._data.link;
-    popupImagePic.alt = this._data.name;
-    popupImageSubtitle.textContent = this._data.name;
-  };
+_handleImageClickWrapper = () => {
+  this._handleImageClick(this._data.link, this._data.name);
+};
 
   createCard() {
     this._element = this._getTemplate();
@@ -48,6 +46,7 @@ class Card {
     this._cardLikeButton.addEventListener('click', this._handleLikeClick);
     cardTrashButton.addEventListener('click', this._handleTrashClick);
     cardImage.addEventListener('click', this._handleImageClick);
+    cardImage.addEventListener('click', this._handleImageClickWrapper);
 
     return this._element;
   }

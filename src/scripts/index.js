@@ -45,9 +45,17 @@ const buttonCloseList = document.querySelectorAll('.popup__close-bttn');
 //КАРТОЧКА
 const cardList = document.querySelector('.cards');
 
+//Функция открытия попапа с картинкой
+function handleImageClick(link, name) {
+  showPopup(popupImage);
+  popupImagePic.src = link;
+  popupImagePic.alt = name;
+  popupImageSubtitle.textContent = name;
+}
+
 //Функция генерации разменки, которая возвращает карточку
 function createNewCard(cardData) {
-  const cardElement = new Card(cardData, '.cards-template').createCard();
+  const cardElement = new Card(cardData, '.cards-template', handleImageClick).createCard();
   return cardElement;
 }
 //обход массива данных
@@ -106,4 +114,4 @@ buttonCloseList.forEach(btn => {
   profileValidation.enableValidation();
   newCardValidation.enableValidation();  
   
-export { popupImagePic, popupImageSubtitle, popupImage, classValidation};
+export { handleImageClick, classValidation};
