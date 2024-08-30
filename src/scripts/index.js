@@ -46,13 +46,13 @@ const buttonCloseList = document.querySelectorAll('.popup__close-bttn');
 const cardList = document.querySelector('.cards');
 
 //Функция генерации разменки, которая возвращает карточку
-function newCard(cardData) {
+function createNewCard(cardData) {
   const cardElement = new Card(cardData, '.cards-template').createCard();
   return cardElement;
 }
 //обход массива данных
 initialCards.forEach((objectCard) => { 
-  const cardElement = newCard(objectCard);
+  const cardElement = createNewCard(objectCard);
   cardList.append(cardElement); 
 });
 
@@ -65,7 +65,7 @@ function handleFormAddCard(evt) {
   };
   popupAddCardAddNameInput.value = "";
   popupAddCardAddUrlInput.value = "";
-  cardList.prepend(newCard(newObjectCard));
+  cardList.prepend(createNewCard(newObjectCard));
   newCardValidation.toogleButton();
   hidePopup(popupAddCard);
 };
